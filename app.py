@@ -1,5 +1,4 @@
-from flask import Flask,render_template,request,redirect
-
+from flask import Flask,render_template,request,redirect,jsonify,make_response
 
 app = Flask(__name__)
 
@@ -57,6 +56,24 @@ def update(id):
             return redirect('/')
         except:
             return "Error updating the task"
+@app.route('/tip')
+def tip():
+    if request.method == 'GET':
+        return jsonify({
+            'tip' : 'Learn Flask today'
+        })
+    
+@app.route('/loveCookie')
+def cookie():
+    if request.method=='GET':
+        response =make_response('Check in dev tools🫣')
+        response.set_cookie('task-flask','We love flask and you',max_age=3000)
+        return response
+    
+@app.errorhandler(404)
+def page_not_found(error):
+    return "Uh oh this page doesnt exist"
+
 
 if __name__ == '__main__':
     with open('tasks.txt', 'w') as file:

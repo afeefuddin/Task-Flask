@@ -1,0 +1,36 @@
+.taskbox{
+    border: 1px black solid;
+    display: flex;
+    flex-direction: row;
+    width: full;
+    gap: 10px;
+    justify-content: space-between;
+    padding: 4px;
+}
+/* .updateInput{
+    display: none;
+}
+.confirmUpdate{
+    display: none;
+} */
+.updateform{
+    display: none;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}
+.flex{
+    display: flex;
+    flex-direction: row;
+}
+.text-center{
+    text-align: center;
+}
+
+.input{
+    display: flex;
+    flex-direction: row; 
+    justify-content: center;
+    margin-bottom: 10px;
+    gap: 2px;
+}

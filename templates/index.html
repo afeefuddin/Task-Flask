@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static',filename='css/style.css')}}" />
+    <title>Python</title>
+</head>
+<body>
+    <h1 class="text-center">Task Manager</h1>
+    <form action="/" method="POST" class="input">
+        <input type="text" name="task">
+        <input type="submit" name="submit" value="submit">
+    </form>
+    {% for task in tasks %}
+        <div class="{{loop.index -1}} taskbox">
+            <div class="taskelem">{{task}}</div>
+            <form action="/update/{{loop.index-1}}" method="POST" class="updateform">
+
+                <input type="text" name="task" class="updateInput">
+                <input type="submit" name="update" id="" value="Confirm" class="confirmUpdate">
+            </form>
+                <div class="flex">
+                    <button class="updateButton">Update</button>
+                    <button>
+                        <a href="/delete/{{loop.index-1}}">Delete</a>
+                    </button>
+                </div>
+        </div>
+    {% endfor %}
+</body>
+<!-- <script>
+    let update = document.getElementsByClassName('updateButton')
+    update= [...update]
+    update.forEach((element,index) => {
+        element.addEventListener('click',()=>{
+            let input = document.getElementsByClassName('updateform')[index]
+            let val = document.getElementsByClassName('taskelem')[index]
+            input.value = val.innerHTML
+            input.style.display = "flex"
+            val.style.display="none"
+            // let but = document.getElementsByClassName('taskelem')[index]
+            element.style.display = "none"
+
+        })     
+    });
+</script> -->
+<script>
+    let updateButtons = document.getElementsByClassName('updateButton');
+    
+    Array.from(updateButtons).forEach((button, index) => {
+        button.addEventListener('click', () => {
+            let container = button.closest('.taskbox');
+            let updateForm = container.querySelector('.updateform');
+            let taskelem = container.querySelector('.taskelem');
+
+            let input = updateForm.querySelector('.updateInput');
+            input.value = taskelem.innerHTML;
+
+            updateForm.style.display = "flex";
+            taskelem.style.display = "none";
+            button.style.display = "none";
+        });
+    });
+</script>
+
+</html>
